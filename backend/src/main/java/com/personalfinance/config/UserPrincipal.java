@@ -1,31 +1,26 @@
 package com.personalfinance.config;
 
 import com.personalfinance.domain.User;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
+
+@RequiredArgsConstructor
 public class UserPrincipal implements UserDetails {
 
+    @Getter
     private final UUID id;
     private final String email;
     private final String passwordHash;
 
-    public UserPrincipal(UUID id, String email, String passwordHash) {
-        this.id = id;
-        this.email = email;
-        this.passwordHash = passwordHash;
-    }
-
     public static UserPrincipal from(User user) {
         return new UserPrincipal(user.getId(), user.getEmail(), user.getPasswordHash());
-    }
-
-    public UUID getId() {
-        return id;
     }
 
     @Override

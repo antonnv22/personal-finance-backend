@@ -1,10 +1,6 @@
 package com.personalfinance.exception;
 
-import com.personalfinance.exception.CategoryTypeMismatchException;
-import com.personalfinance.exception.ConflictException;
-import com.personalfinance.exception.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
-import java.time.Instant;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -12,6 +8,8 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.time.Instant;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
