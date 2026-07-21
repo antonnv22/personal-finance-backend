@@ -4,11 +4,11 @@ import com.personalfinance.domain.Category;
 import com.personalfinance.domain.CategoryType;
 import com.personalfinance.domain.User;
 import com.personalfinance.repository.CategoryRepository;
+import java.util.List;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

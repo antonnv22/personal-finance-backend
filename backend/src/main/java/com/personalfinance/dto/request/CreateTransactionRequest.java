@@ -3,7 +3,6 @@ package com.personalfinance.dto.request;
 import com.personalfinance.domain.TransactionType;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;

@@ -1,7 +1,6 @@
 package com.personalfinance.dto.response;
 
 import com.personalfinance.domain.CategoryType;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
