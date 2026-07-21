@@ -1,21 +1,14 @@
 package com.personalfinance.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Getter;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Getter
 @Entity
 @Table(name = "transactions")
 public class Transaction {
@@ -87,43 +80,4 @@ public class Transaction {
         updatedAt = LocalDateTime.now();
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public TransactionType getType() {
-        return type;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public LocalDate getTransactionDate() {
-        return transactionDate;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
 }

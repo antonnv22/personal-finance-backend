@@ -1,18 +1,13 @@
 package com.personalfinance.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Getter
 @Entity
 @Table(name = "categories")
 public class Category {
@@ -24,6 +19,7 @@ public class Category {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Setter
     @Column(nullable = false)
     private String name;
 
@@ -51,27 +47,4 @@ public class Category {
         }
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public CategoryType getType() {
-        return type;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
 }
