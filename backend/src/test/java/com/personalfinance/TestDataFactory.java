@@ -10,14 +10,15 @@ import com.personalfinance.dto.request.CreateCategoryRequest;
 import com.personalfinance.dto.request.CreateTransactionRequest;
 import com.personalfinance.dto.request.RegisterRequest;
 import com.personalfinance.dto.response.AuthResponse;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.UUID;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
