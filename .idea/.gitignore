@@ -1,13 +1,3 @@
-# Default ignored files
-/shelf/
-/workspace.xml
-# Editor-based HTTP Client requests
-/httpRequests/
-# Ignored default folder with query files
-/queries/
-# Datasource local storage ignored files
-/dataSources/
-/dataSources.local.xml
 # IntelliJ IDEA
 .idea/
 *.iml
@@ -17,6 +7,9 @@
 # Gradle
 .gradle/
 build/
+
+# Build output
+out/
 
 # Logs
 *.log
@@ -29,16 +22,10 @@ Thumbs.db
 *.tmp
 *.temp
 
-# Test reports
-out/
-
-# Gradle
-.gradle/
-build/
-
-# IntelliJ IDEA
-.idea/
-*.iml
-
-# Build output
-out/
+# IntelliJ local files
+/shelf/
+/workspace.xml
+/httpRequests/
+/queries/
+/dataSources/
+/dataSources.local.xml
