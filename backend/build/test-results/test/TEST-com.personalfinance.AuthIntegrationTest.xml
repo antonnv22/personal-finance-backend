@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.personalfinance.AuthIntegrationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-07-21T14:09:01.932Z" hostname="Antons-MacBook-Pro.local" time="0.245">
+  <properties/>
+  <testcase name="shouldRegisterLoginAndAccessProtectedEndpoint()" classname="com.personalfinance.AuthIntegrationTest" time="0.245"/>
+  <system-out><![CDATA[2026-07-21T17:09:01.930+03:00  INFO 5932 --- [personal-finance] [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.personalfinance.AuthIntegrationTest]: AuthIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-07-21T17:09:01.931+03:00  INFO 5932 --- [personal-finance] [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.personalfinance.PersonalFinanceApplication for test class com.personalfinance.AuthIntegrationTest
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
