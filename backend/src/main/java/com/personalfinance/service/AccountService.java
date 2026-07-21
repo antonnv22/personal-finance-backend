@@ -11,6 +11,7 @@ import com.personalfinance.mapper.EntityMapper;
 import com.personalfinance.repository.AccountRepository;
 import com.personalfinance.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AccountService {
@@ -45,6 +47,11 @@ public class AccountService {
         Currency currency = request.currency() != null ? request.currency() : Currency.RUB;
         Account account = new Account(user, request.name(), request.type(), currency);
         accountRepository.save(account);
+        log.info(
+                "Creating account. userId={}, name={}",
+                account.getUser().getId(),
+                account.getName()
+        );
         return toResponseWithBalance(account);
     }
 
