@@ -8,6 +8,8 @@ import com.personalfinance.service.TransactionService;
 import jakarta.validation.Valid;
 import java.time.LocalDate;
 import java.util.UUID;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -25,15 +27,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/transactions")
+@RequiredArgsConstructor
 public class TransactionController {
 
     private final TransactionService transactionService;
     private final SecurityUtils securityUtils;
-
-    public TransactionController(TransactionService transactionService, SecurityUtils securityUtils) {
-        this.transactionService = transactionService;
-        this.securityUtils = securityUtils;
-    }
 
     @GetMapping
     public Page<TransactionResponse> getAll(
