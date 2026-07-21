@@ -63,5 +63,6 @@ tasks.withType<Test> {
 }
 
 tasks.withType<JavaCompile> {
+    options.compilerArgs.add("-parameters")
     options.compilerArgs.add("-Amapstruct.defaultComponentModel=spring")
 }
