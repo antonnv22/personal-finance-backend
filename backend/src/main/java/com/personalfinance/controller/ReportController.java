@@ -7,6 +7,8 @@ import com.personalfinance.dto.response.SummaryReportResponse;
 import com.personalfinance.service.ReportService;
 import java.time.LocalDate;
 import java.util.List;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,15 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/reports")
+@RequiredArgsConstructor
 public class ReportController {
 
     private final ReportService reportService;
     private final SecurityUtils securityUtils;
-
-    public ReportController(ReportService reportService, SecurityUtils securityUtils) {
-        this.reportService = reportService;
-        this.securityUtils = securityUtils;
-    }
 
     @GetMapping("/monthly")
     public MonthlyReportResponse getMonthlyReport(
