@@ -24,6 +24,16 @@ spring:
         enabled: true
         backend: secret
         application-name: personal-finance
+  ai:
+    mcp:
+      server:
+        enabled: true
+        name: personal-finance
+        version: 1.0.0
+        type: SYNC
+        instructions: "Финансовый MCP-сервер: логин и запрос баланса"
+        capabilities:
+          tool: true
 
 server:
   port: ${SERVER_PORT:8080}
@@ -37,7 +47,15 @@ management:
   endpoints:
     web:
       exposure:
-        include: health
+        include: health,info,metrics,prometheus
+
+  endpoint:
+    health:
+      show-details: always
+
+  metrics:
+    tags:
+      application: personal-finance
 
 logging:
   level:

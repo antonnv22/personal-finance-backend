@@ -25,12 +25,14 @@ repositories {
     mavenCentral()
 }
 
+val springAiVersion = "1.0.9"
 val mapstructVersion = "1.6.3"
 val jjwtVersion = "0.12.6"
 val testcontainersVersion = "1.21.0"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.ai:spring-ai-starter-mcp-server-webmvc")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-security")
@@ -57,6 +59,9 @@ dependencies {
 
     implementation("net.logstash.logback:logstash-logback-encoder:8.1")
 
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("io.micrometer:micrometer-registry-prometheus")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
     testImplementation("org.testcontainers:junit-jupiter:$testcontainersVersion")
@@ -67,6 +72,10 @@ dependencies {
 dependencyManagement {
     imports {
         mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+
+        mavenBom(
+            "org.springframework.ai:spring-ai-bom:$springAiVersion"
+        )
     }
 }
 
