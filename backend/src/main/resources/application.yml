@@ -14,10 +14,14 @@ spring:
     enabled: true
     locations: classpath:db/migration
   config:
-    import: vault://
+    # optional: приложение стартует и без Vault — например, в тестах или когда
+    # параметры БД пришли переменными окружения (Docker). Без этого запечатанный
+    # или выключенный Vault роняет запуск.
+    import: optional:vault://
   cloud:
     vault:
-      uri: http://localhost:8200
+      # localhost — для запуска из IDE; в Docker переопределяется на http://vault:8200
+      uri: ${VAULT_URI:http://localhost:8200}
       authentication: TOKEN
       token: ${VAULT_TOKEN}
       kv:
@@ -42,6 +46,13 @@ app:
   jwt:
     secret: ${JWT_SECRET:change-me-in-production-use-at-least-256-bit-secret-key-here}
     expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+  scheduling:
+    enabled: true
+  recurring:
+    # На сколько месяцев вперёд материализуются запланированные платежи.
+    horizon-months: 12
+    # Ежедневное пополнение горизонта планирования.
+    generation-cron: "0 15 3 * * *"
 
 management:
   endpoints:
@@ -52,6 +63,13 @@ management:
   endpoint:
     health:
       show-details: always
+      group:
+        # Готовность обслуживать запросы = доступна БД. Индикатор Vault сюда
+        # намеренно не входит: секреты читаются один раз при старте, и
+        # запечатанный Vault не мешает работающему приложению отвечать.
+        # На эту группу настроен healthcheck контейнера.
+        readiness:
+          include: db, ping
 
   metrics:
     tags:

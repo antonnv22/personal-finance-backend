@@ -28,10 +28,9 @@
 
     <appender name="LOGSTASH"
               class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>
-<!--            logstash:5000-->
-            localhost:5001
-        </destination>
+        <!-- localhost:5001 — проброшенный на хост порт Logstash, для запуска из IDE.
+             В Docker переопределяется на logstash:5000 (порт внутри сети). -->
+        <destination>${LOGSTASH_DESTINATION:-localhost:5001}</destination>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
     </appender>
 

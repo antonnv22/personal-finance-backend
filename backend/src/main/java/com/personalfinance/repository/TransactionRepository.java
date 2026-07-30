@@ -18,16 +18,23 @@ public interface TransactionRepository extends JpaRepository<Transaction, UUID> 
 
     Optional<Transaction> findByIdAndUserId(UUID id, UUID userId);
 
+    /**
+     * Необязательные фильтры выражены через COALESCE, а не через
+     * {@code :param IS NULL}: в последнем случае PostgreSQL не может вывести тип
+     * параметра и падает с «could not determine data type». Внутри COALESCE тип
+     * берётся от колонки. Все участвующие колонки объявлены NOT NULL, поэтому
+     * при null-фильтре условие вырождается в тождество.
+     */
     @Query("""
             SELECT t FROM Transaction t
             JOIN FETCH t.account
             JOIN FETCH t.category
             WHERE t.user.id = :userId
-            AND (:accountId IS NULL OR t.account.id = :accountId)
-            AND (:categoryId IS NULL OR t.category.id = :categoryId)
-            AND (:type IS NULL OR t.type = :type)
-            AND (:from IS NULL OR t.transactionDate >= :from)
-            AND (:to IS NULL OR t.transactionDate <= :to)
+            AND t.account.id = COALESCE(:accountId, t.account.id)
+            AND t.category.id = COALESCE(:categoryId, t.category.id)
+            AND t.type = COALESCE(:type, t.type)
+            AND t.transactionDate >= COALESCE(:from, t.transactionDate)
+            AND t.transactionDate <= COALESCE(:to, t.transactionDate)
             ORDER BY t.transactionDate DESC, t.createdAt DESC
             """)
     Page<Transaction> findFiltered(

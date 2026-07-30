@@ -44,7 +44,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/sse/**").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/actuator/health").permitAll()
+                        // Вместе с подгруппами (/actuator/health/readiness) —
+                        // на неё настроен healthcheck контейнера.
+                        .requestMatchers("/actuator/health", "/actuator/health/**").permitAll()
                         // MCP
                         .requestMatchers("/mcp/**").permitAll()
                         // Swagger
