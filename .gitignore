@@ -1,3 +1,20 @@
+# Secrets and local environment
+# NEVER commit .env — it holds VAULT_TOKEN and database credentials.
+.env
+.env.local
+*.env
+!.env.example
+
+# Vault unseal keys and root token. Держать только локально;
+# правильное место для них — менеджер паролей, а не файл на диске.
+vault-keys.json
+vault-keys.txt
+
+# Node / frontend
+node_modules/
+dist/
+*.tsbuildinfo
+
 # IntelliJ IDEA
 .idea/
 *.iml
