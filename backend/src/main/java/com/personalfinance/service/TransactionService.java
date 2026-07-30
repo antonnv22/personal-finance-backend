@@ -50,6 +50,16 @@ public class TransactionService {
 
     @Transactional
     public TransactionResponse create(UUID userId, CreateTransactionRequest request) {
+        return entityMapper.toTransactionResponse(createEntity(userId, request));
+    }
+
+    /**
+     * То же создание, но возвращает саму сущность. Нужно вызывающим, которым
+     * требуется ссылка на транзакцию — например, подтверждению запланированного
+     * платежа, связывающему её с {@code RecurringExpenseOccurrence}.
+     */
+    @Transactional
+    public Transaction createEntity(UUID userId, CreateTransactionRequest request) {
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found"));
         Account account = accountRepository
                 .findByIdAndUserId(request.accountId(), userId)
@@ -66,8 +76,11 @@ public class TransactionService {
                 request.type(),
                 request.description(),
                 request.transactionDate());
-        transactionRepository.save(transaction);
-        return entityMapper.toTransactionResponse(transaction);
+        // Возвращаем именно результат save(): идентификатор присваивается вручную
+        // в конструкторе, поэтому Spring Data выполняет merge() и отдаёт новый
+        // управляемый экземпляр — исходный остаётся detached и непригоден для
+        // связывания с другими сущностями.
+        return transactionRepository.save(transaction);
     }
 
     @Transactional
