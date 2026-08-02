@@ -1,5 +1,6 @@
 package com.personalfinance.dto.response;
 
+import com.personalfinance.domain.Currency;
 import com.personalfinance.domain.TransactionType;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -22,6 +23,13 @@ public record TransactionResponse(
                 example = "150.50"
         )
         BigDecimal amount,
+
+        @Schema(
+                description = "Currency the amount is expressed in. Transactions have no currency "
+                        + "of their own — it is always the currency of the account.",
+                example = "EUR"
+        )
+        Currency currency,
 
         @Schema(
                 description = "Transaction type",

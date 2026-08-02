@@ -1,0 +1,11 @@
+.gradle/
+build/
+out/
+bin/
+.idea/
+*.iml
+.git/
+.DS_Store
+docker-compose.yaml
+elk/
+vault/

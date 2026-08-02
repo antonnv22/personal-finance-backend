@@ -16,6 +16,11 @@ services:
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false
+      # Без явного лимита ES резервирует под heap половину всей памяти Docker
+      # (~3.9 ГиБ из 7.7) и вытесняет остальные контейнеры — контейнер падал с OOM (код 137).
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+    mem_limit: 2g
+    restart: unless-stopped
     ports:
       - "9200:9200"
 
@@ -28,6 +33,10 @@ services:
 
   logstash:
     image: docker.elastic.co/logstash/logstash:8.14.3
+    environment:
+      - "LS_JAVA_OPTS=-Xms512m -Xmx512m"
+    mem_limit: 1g
+    restart: unless-stopped
     ports:
       - "5001:5000"
     volumes:

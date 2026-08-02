@@ -7,8 +7,20 @@ spring:
       ddl-auto: validate
   flyway:
     enabled: true
+  # Vault отключается в AbstractIntegrationTest — оттуда свойства применяются
+  # раньше разбора spring.config.import и действительно его перекрывают.
+  ai:
+    mcp:
+      server:
+        enabled: false
 
 app:
   jwt:
     secret: test-secret-key-for-integration-tests-min-32-chars
     expiration-ms: 3600000
+  # Генерация запланированных платежей вызывается в тестах явно —
+  # фоновая задача сделала бы результаты недетерминированными.
+  scheduling:
+    enabled: false
+  recurring:
+    horizon-months: 12
